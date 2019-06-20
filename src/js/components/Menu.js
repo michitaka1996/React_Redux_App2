@@ -82,7 +82,7 @@ class Menu extends React.Component{
                     <i className="far fa-3x fa-check-circle"></i>
                 </div>
                 <div className="c-menu__contents">
-                    <h3 className="c-menu__title">ここを動的にかえる &emsp; <div className="c-menu__date" id="menu-date">{this.props.date}</div></h3> 
+                    <h3 className="c-menu__title">{this.props.title}&emsp; <div className="c-menu__date" id="menu-date">{this.props.date}</div></h3> 
                     {textarea}
                     <div className="c-menu__edit" onClick={this.handleShowEdit}>
                         <i className="fal fa-2x fa-edit"></i>

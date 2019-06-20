@@ -10,9 +10,11 @@ console.log('reducers(menu): このreducer名が以降でstateの名前になり
 const initialState = {
     menus: [{
         id: 'XXX',
-        text: 'gegeqwgregqgegrergqs',
+        title: 'メニュー',
+        text: 'sample Menu1',
+        degree: '',
         isDone: false,
-        date: 'YYY',
+        date: '20XX年X月X日',
     }]
 };
 console.log('reducers: 初期値', initialState); //最初だけ読みとこまれる
@@ -76,8 +78,10 @@ export default function menu(state = initialState, action) {
                     ...state.menus,
                     {
                         id: action.id,
+                        title: action.title,
                         isDone: false,
                         text: action.text,
+                        degree: action.degree,
                         date: action.date
                     }
                 ]

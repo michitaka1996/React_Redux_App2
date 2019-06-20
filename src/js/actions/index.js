@@ -6,12 +6,13 @@
 
 
 //渡す引数、メニューのid、メニュー内容(text)、疲労度(degree)
-export function addMenu(id, text, degree, date) {
+export function addMenu(id, title, text, degree, date) {
     console.log('actions: addMenuです');
     console.log('actions: dispach()を指定することでcomponentから渡された値の入っているactionsです。typeを識別してreducersへその値を引き渡します。');
     return {
         type: "ADD",
         id: id,
+        title: title,
         text: text,
         degree: degree,
         date: date
@@ -40,12 +41,14 @@ export function toggleDone(id) {
         id: id
     };
 }
-export function firstMenu(id, text, date) {  
+export function firstMenu(id, title, text, degree, date) {  
     console.log('actions: 疲労度1の場合のメニューを作成します ');
     return {
         type: "FIRST",
         id: id,
+        title: title,
         text: text,
+        degree: degree,
         date: date
     }
 }

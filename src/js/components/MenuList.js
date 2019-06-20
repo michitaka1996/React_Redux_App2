@@ -11,6 +11,10 @@ import PropTypes from 'prop-types';
       //子要素に、propsとしてメソッドを渡している そのメソッドはcontanerの方で調整している(dispach)
     //この親コンポーネントに、containerからdispach()やstateを渡すことになる
     //この親コンポーネントは、子コンポーネントへpropsを受け渡すことになる
+
+
+
+
 class MenuList extends React.Component{
     constructor(props) {
         super(props);
@@ -20,7 +24,7 @@ class MenuList extends React.Component{
         const { menus, onEnterUpdateMenu ,  onClickRemove, onClickToggleDone } = this.props;
         console.log('親component: この時点でのprops', this.props);  //ここでcontainerからpropが渡っていて、指定できているか確認すること
         console.log('親component: menusとは', this.props.menus);
-        
+
         let tasks = [];
         for (let i in menus) {
             console.log('親component:menus[i]', menus[i]);  //この２つの違いに注意
