@@ -1625,6 +1625,8 @@ var MenuCreater = function (_React$Component) {
         _this.fourthDegree = _this.fourthDegree.bind(_this);
         _this.fifthDegree = _this.fifthDegree.bind(_this);
 
+        // this.handleDate = this.handleDate.bind(this);
+
         return _this;
     }
 
@@ -1660,14 +1662,25 @@ var MenuCreater = function (_React$Component) {
                 console.log('component(MenuCreater): Enter+ShiftKeyが押されたので確定します');
                 var val = e.target.value;
                 var degree = this.state.degree;
+                var title = '筋力トレーニング';
+
+                // this.handleDate();
                 var now = new Date();
                 var y = now.getFullYear();
                 var m = now.getMonth() + 1;
-                var d = now.getDate();
-                var w = now.getDay();
-                var wd = ['日', '月', '火', '水', '木', '金', '土'];
 
+                var d = now.getDate();
+                var dSecond = now.getDate() + 1;
+                var dThird = now.getDate() + 2;
+
+                var w = now.getDay();
+                var wSecond = now.getDay() + 1;
+                var wThird = now.getDay() + 2;
+
+                var wd = ['日', '月', '火', '水', '木', '金', '土'];
                 var date = y + '年' + m + '月' + d + '日' + '(' + wd[w] + ')';
+                var dateSecond = y + '年' + m + '月' + dSecond + '日' + '(' + wd[wSecond] + ')';
+                var dateThird = y + '年' + m + '月' + dThird + '日' + '(' + wd[wThird] + ')';
                 console.log('component(MenuCreater): 今日のdate', date);
 
                 if (val.length >= 2 && degree) {
@@ -1695,10 +1708,14 @@ var MenuCreater = function (_React$Component) {
 
                         switch (this.state.degree) {//あとで関数にリファクタする
                             case 'first':
-                                var valFirst = 'valFirst(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)です'; //これを固定のテキストとする
+                                var valFirstOne = 'valFirstOne(固定)ですvalFirstOne(固定)ですvalFirstOne(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)です'; //これを固定のテキストとする
+                                var valFirstTwo = 'valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)';
+                                var valFirstThree = 'valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)';
                                 console.log('component(MenuCreater): containerからdispachをすることでMenuを作成します');
                                 this.thirdDegree();
-                                this.props.dispatch((0, _index.firstMenu)(this.createHashId(), valFirst, date)); //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                                this.props.dispatch((0, _index.firstMenu)(this.createHashId(), title, valFirstOne, degree, date)); //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                                this.props.dispatch((0, _index.firstMenu)(this.createHashId(), title, valFirstTwo, degree, dateSecond));
+                                this.props.dispatch((0, _index.firstMenu)(this.createHashId(), title, valFirstThree, degree, dateThird));
                                 break;
                             case 'second':
                                 console.log('component(MenuCreater): 疲労度はsecondです');
@@ -1715,9 +1732,6 @@ var MenuCreater = function (_React$Component) {
                             default:
                         }
                     }
-                    // else {
-                    //     console.log('component(MenuCreater): degreeの値はありません');
-                    // }
                 }
 
                 console.log('component(MenuCreater):stateをリセットします'); //ついでにisDegreeも反転させておく
@@ -1773,6 +1787,19 @@ var MenuCreater = function (_React$Component) {
                 isDegree: !this.state.isDegree
             });
         }
+        // handleDate() {
+        //     let now = new Date();
+        //     let y = now.getFullYear();
+        //     let m = now.getMonth() + 1;
+        //     let d = now.getDate();
+        //     let w = now.getDay();
+        //     let wd = ['日', '月', '火', '水', '木', '金', '土'];
+
+        //     let date = y + '年' + m + '月' + d + '日' + '(' + wd[w] + ')';
+        //     console.log('component(MenuCreater): 今日のdate', date);
+        // }
+
+
     }, {
         key: 'render',
         value: function render() {
@@ -1938,12 +1965,13 @@ exports.firstMenu = firstMenu;
 
 
 //渡す引数、メニューのid、メニュー内容(text)、疲労度(degree)
-function addMenu(id, text, degree, date) {
+function addMenu(id, title, text, degree, date) {
     console.log('actions: addMenuです');
     console.log('actions: dispach()を指定することでcomponentから渡された値の入っているactionsです。typeを識別してreducersへその値を引き渡します。');
     return {
         type: "ADD",
         id: id,
+        title: title,
         text: text,
         degree: degree,
         date: date
@@ -1972,12 +2000,14 @@ function toggleDone(id) {
         id: id
     };
 }
-function firstMenu(id, text, date) {
+function firstMenu(id, title, text, degree, date) {
     console.log('actions: 疲労度1の場合のメニューを作成します ');
     return {
         type: "FIRST",
         id: id,
+        title: title,
         text: text,
+        degree: degree,
         date: date
     };
 }
@@ -29179,6 +29209,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //子要素に、propsとしてメソッドを渡している そのメソッドはcontanerの方で調整している(dispach)
 //この親コンポーネントに、containerからdispach()やstateを渡すことになる
 //この親コンポーネントは、子コンポーネントへpropsを受け渡すことになる
+
+
 var MenuList = function (_React$Component) {
     _inherits(MenuList, _React$Component);
 
@@ -29392,7 +29424,8 @@ var Menu = function (_React$Component) {
           _react2.default.createElement(
             'h3',
             { className: 'c-menu__title' },
-            '\u3053\u3053\u3092\u52D5\u7684\u306B\u304B\u3048\u308B \u2003 ',
+            this.props.title,
+            '\u2003 ',
             _react2.default.createElement(
               'div',
               { className: 'c-menu__date', id: 'menu-date' },
@@ -29556,9 +29589,11 @@ console.log('reducers(menu): このreducer名が以降でstateの名前になり
 var initialState = {
     menus: [{
         id: 'XXX',
-        text: 'gegeqwgregqgegrergqs',
+        title: 'メニュー',
+        text: 'sample Menu1',
+        degree: '',
         isDone: false,
-        date: 'YYY'
+        date: '20XX年X月X日'
     }]
 };
 console.log('reducers: 初期値', initialState); //最初だけ読みとこまれる
@@ -29621,8 +29656,10 @@ function menu() {
             return {
                 menus: [].concat(_toConsumableArray(state.menus), [{
                     id: action.id,
+                    title: action.title,
                     isDone: false,
                     text: action.text,
+                    degree: action.degree,
                     date: action.date
                 }])
             };

@@ -31,6 +31,7 @@ class MenuCreater extends React.Component{
         this.fourthDegree = this.fourthDegree.bind(this);
         this.fifthDegree = this.fifthDegree.bind(this);
         
+        // this.handleDate = this.handleDate.bind(this);
 
     }
     createHashId() {
@@ -56,14 +57,25 @@ class MenuCreater extends React.Component{
             console.log('component(MenuCreater): Enter+ShiftKeyが押されたので確定します');
             const val = e.target.value;
             const degree = this.state.degree;
+            const title = '筋力トレーニング';
+
+            // this.handleDate();
             let now = new Date();
             let y = now.getFullYear();
             let m = now.getMonth() + 1;
-            let d = now.getDate();
-            let w = now.getDay();
-            let wd = ['日', '月', '火', '水', '木', '金', '土'];
 
+            let d = now.getDate();
+            let dSecond = now.getDate() + 1;
+            let dThird = now.getDate() + 2;
+
+            let w = now.getDay();
+            let wSecond = now.getDay() + 1;
+            let wThird = now.getDay() + 2;
+
+            let wd = ['日', '月', '火', '水', '木', '金', '土'];
             let date = y + '年' + m + '月' + d + '日' + '(' + wd[w] + ')';
+            let dateSecond = y + '年' + m + '月' + dSecond + '日' + '(' + wd[wSecond] +  ')'; 
+            let dateThird = y + '年' + m + '月' + dThird + '日' + '(' + wd[wThird] + ')'; 
             console.log('component(MenuCreater): 今日のdate', date);
 
             
@@ -93,10 +105,14 @@ class MenuCreater extends React.Component{
 
                     switch (this.state.degree) { 　//あとで関数にリファクタする
                         case 'first':
-                            const valFirst = 'valFirst(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)です';  //これを固定のテキストとする
+                            const valFirstOne = 'valFirstOne(固定)ですvalFirstOne(固定)ですvalFirstOne(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)です';  //これを固定のテキストとする
+                            const valFirstTwo= 'valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)'
+                            const valFirstThree = 'valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)'
                             console.log('component(MenuCreater): containerからdispachをすることでMenuを作成します');
                             this.thirdDegree();
-                            this.props.dispatch(firstMenu(this.createHashId(), valFirst,  date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(firstMenu(this.createHashId(), title, valFirstOne,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(firstMenu(this.createHashId(), title, valFirstTwo,  degree, dateSecond));
+                            this.props.dispatch(firstMenu(this.createHashId(), title, valFirstThree,  degree, dateThird));
                             break;
                         case 'second':
                             console.log('component(MenuCreater): 疲労度はsecondです');
@@ -113,9 +129,6 @@ class MenuCreater extends React.Component{
                         default: 
                     }
                 }
-                // else {
-                //     console.log('component(MenuCreater): degreeの値はありません');
-                // }
             }
             
             console.log('component(MenuCreater):stateをリセットします'); //ついでにisDegreeも反転させておく
@@ -164,6 +177,17 @@ class MenuCreater extends React.Component{
             isDegree :!this.state.isDegree
         });
     }
+    // handleDate() {
+    //     let now = new Date();
+    //     let y = now.getFullYear();
+    //     let m = now.getMonth() + 1;
+    //     let d = now.getDate();
+    //     let w = now.getDay();
+    //     let wd = ['日', '月', '火', '水', '木', '金', '土'];
+
+    //     let date = y + '年' + m + '月' + d + '日' + '(' + wd[w] + ')';
+    //     console.log('component(MenuCreater): 今日のdate', date);
+    // }
 
 
 
