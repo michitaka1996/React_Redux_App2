@@ -57,7 +57,10 @@ class MenuCreater extends React.Component{
             console.log('component(MenuCreater): Enter+ShiftKeyが押されたので確定します');
             const val = e.target.value;
             const degree = this.state.degree;
-            const title = '筋力トレーニング';
+            const titleRun = 'ダッシュ系';
+            const titleWeight = '筋力トレーニング';
+            const titleJump = 'ジャンプ系トレーニング';
+            const titleRest = '完全休養'
 
             // this.handleDate();
             let now = new Date();
@@ -105,16 +108,22 @@ class MenuCreater extends React.Component{
 
                     switch (this.state.degree) { 　//あとで関数にリファクタする
                         case 'first':
-                            const valFirstOne = 'valFirstOne(固定)ですvalFirstOne(固定)ですvalFirstOne(固定)ですvalFirst(固定)ですvalFirst(固定)ですvalFirst(固定)です';  //これを固定のテキストとする
-                            const valFirstTwo= 'valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)'
-                            const valFirstThree = 'valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)'
+                            const valRun = 'フォーム修正や自分の弱み強みを見つける分析のための練習です。コーンを10m毎に置いて100mを走り、10m毎のラップを取ります。そのデータを元に自分の走りを分析します。50m走でやってもOK。';  //これを固定のテキストとする
+                            const valWeight= 'valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)'
+                            const valJump = 'valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)'
                             console.log('component(MenuCreater): containerからdispachをすることでMenuを作成します');
-                            this.thirdDegree();
-                            this.props.dispatch(firstMenu(this.createHashId(), title, valFirstOne,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
-                            this.props.dispatch(firstMenu(this.createHashId(), title, valFirstTwo,  degree, dateSecond));
-                            this.props.dispatch(firstMenu(this.createHashId(), title, valFirstThree,  degree, dateThird));
+                            this.firstDegree();
+                            this.props.dispatch(firstMenu(this.createHashId(), titleRun, valRun,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(firstMenu(this.createHashId(), titleWeight, valWeight,  degree, dateSecond));
+                            this.props.dispatch(firstMenu(this.createHashId(), titleJump, valJump,  degree, dateThird));
                             break;
+                        //以降同じである
                         case 'second':
+                            const valSecondOne =  '疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です'
+                            const valSecondTwo =  '疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です'
+                            const valSecondThree =  '疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です'
+                            this.secondDegree();
+                        
                             console.log('component(MenuCreater): 疲労度はsecondです');
                             break;
                         case 'third':

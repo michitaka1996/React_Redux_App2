@@ -11,7 +11,7 @@ const initialState = {
     menus: [{
         id: 'XXX',
         title: 'メニュー',
-        text: 'sample Menu1',
+        text: 'sample Menu1　こんな感じでメニューが表示されます',
         degree: '',
         isDone: false,
         date: '20XX年X月X日',
