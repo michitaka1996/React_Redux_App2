@@ -1,0 +1,44 @@
+.c-menu__check {
+    margin-right: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+.c-menu__title {
+    font-weight: bold;
+    font-size: $space-xl;
+    margin-bottom: 20px;
+
+}
+
+.c-menu__date {
+    display: inline;
+}
+
+.c-menu__contents {
+    min-height: 80px;
+}
+
+.c-menu__body, .c-menu__editText {
+    font-size: $font-size-m;
+    width: 430px;
+    border: none;
+    background: #EEEEEE;
+    li{
+        list-style-type: disc;
+    }
+}
+
+.c-menu__delete {
+    width: 40px;
+    height: 40px;
+    margin-left: 2%;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.c-menu__edit {
+    text-align: right;
+}

@@ -1,0 +1,21 @@
+.c-addMenu {
+    font-family: FontAwesome;
+    margin-left: auto;
+    .fa-plus-circle {
+        color: #FF0066;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.fa-check-circle, .fa-times-circle, .fa-edit{
+    font-family: FontAwesome;
+    color: #ADD8E6;
+    &:hover {
+        cursor: pointer;
+    }
+}
+// .fa-edit{
+//     color: #4169E1;
+// }

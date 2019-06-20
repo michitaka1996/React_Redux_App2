@@ -1,0 +1,21 @@
+@import 'foundation/_reset.scss'; 
+@import 'foundation/_base.scss'; 
+@import 'layout/_header.scss';
+@import 'object/project/_MenuCreater.scss'; 
+@import 'object/project/_task.scss'; 
+@import 'object/project/_modalWindow.scss'; 
+@import 'object/component/_icon.scss'; 
+@import 'object/component/_menu.scss'; 
+@import 'object/component/_modal.scss'; 
+
+
+
+
+body{
+    background: #EEEEEE;
+}
+#main{
+    width: 50%;
+    min-height: 600px;
+    margin: 100px auto;
+}

@@ -1,0 +1,44 @@
+.c-modalHead {
+    display: flex;
+    width: 60%;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__btn {
+        background: #6600FF;
+        border-radius: 0.8em;
+        -moz-border-radius: 0.8em;
+        -webkit-border-radius: 0.8em;
+        color: #fff;
+        display: inline-block;
+        font-weight: bold;
+        line-height: 1.6em;
+        margin-right: 15px;
+        text-align: center;
+        width: 1.6em;
+    }
+}
+
+.c-modalBody {
+    textarea{
+        width: 100%;
+        height: 40px;
+        border: 0.1px solid;
+        margin: 20px auto 0 auto;
+        font-size: $font-size-xxl;
+    }
+}
+
+.c-modalHead__btn {
+    cursor: pointer;
+}
+
+.c-modal__colorFirst,
+.c-modal__colorSecond,
+.c-modal__colorThird,
+.c-modal__colorFourth,
+.c-modal__colorFifth {
+    background: #FF0066;
+}
