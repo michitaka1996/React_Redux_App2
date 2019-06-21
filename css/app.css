@@ -142,8 +142,8 @@ body {
   width: 430px;
   border: none;
   background: #EEEEEE; }
-  .c-menu__body li, .c-menu__editText li {
-    list-style-type: disc; }
+  .c-menu__body p, .c-menu__editText p {
+    line-height: 2.3em; }
 
 .c-menu__delete {
   width: 40px;

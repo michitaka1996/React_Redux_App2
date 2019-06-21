@@ -10,8 +10,8 @@ console.log('reducers(menu): このreducer名が以降でstateの名前になり
 const initialState = {
     menus: [{
         id: 'XXX',
-        title: 'メニュー',
-        text: 'sample Menu1　こんな感じでメニューが表示されます',
+        title: 'メニュー例',
+        text: 'sample Menu1　こんな感じでメニューが表示されます 疲労度に合わせて最適なトレーニングが3日分作成されます',
         degree: '',
         isDone: false,
         date: '20XX年X月X日',
@@ -40,6 +40,7 @@ export default function menu(state = initialState, action) {
                     ...state.menus,
                     {
                         id: action.id,
+                        title: action.title,
                         isDone: false,
                         text: action.text,
                         date: action.date

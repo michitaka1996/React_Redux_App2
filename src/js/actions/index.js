@@ -41,7 +41,7 @@ export function toggleDone(id) {
         id: id
     };
 }
-export function firstMenu(id, title, text, degree, date) {  
+export function createMenu(id, title, text, degree, date) {  
     console.log('actions: 疲労度1の場合のメニューを作成します ');
     return {
         type: "FIRST",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { addMenu, firstMenu } from '../actions/index'
+import { addMenu, createMenu } from '../actions/index'
 import PropTypes from 'prop-types';
 
 //component(MenuCreater)
@@ -57,10 +57,20 @@ class MenuCreater extends React.Component{
             console.log('component(MenuCreater): Enter+ShiftKeyが押されたので確定します');
             const val = e.target.value;
             const degree = this.state.degree;
+            const title = 'メモ';
             const titleRun = 'ダッシュ系';
+            const titleSlowRun = 'ロングスプリント';
             const titleWeight = '筋力トレーニング';
+            const titleFitness = '体幹トレーニング';
             const titleJump = 'ジャンプ系トレーニング';
             const titleRest = '完全休養'
+
+            const valRun = 'フォーム修正や自分の弱み強みを見つける分析のための練習です。コーンを10m毎に置いて100mを走り、10m毎のラップを取ります。そのデータを元に自分の走りを分析します。50m走でやってもOK。';  //これを固定のテキストとする
+            const valWeight = 'スクアット80%~10*4, デッドリフト80%~10*4, パワークリーン90%*5*2';
+            const valFitness = '軽い体幹トレーニングをします。';
+            const valJump = 'ハードルジャンプ5足長*8台*5, バウンディング*30m*5, 60m';
+            const valRest = '完全休養です。1日中ダラダラしてください';
+            const valSlowRun = 'ゆっくり走ります。200m*60*8, 60m*80%*2';
 
             // this.handleDate();
             let now = new Date();
@@ -70,16 +80,29 @@ class MenuCreater extends React.Component{
             let d = now.getDate();
             let dSecond = now.getDate() + 1;
             let dThird = now.getDate() + 2;
-
+            
             let w = now.getDay();
             let wSecond = now.getDay() + 1;
             let wThird = now.getDay() + 2;
+
+            switch (w) {
+                case w = 5://今日が金曜日の場合
+                    wThird = w - 5;
+                    break;
+                case w - 6://今日が日曜日の場合
+                    wSecond = w - 6;
+                    break;
+            }
+            
+            console.log('component(MenuCreater): 今日の曜日', w); //5
+            console.log('component(MenuCreater): 明日の曜日', wSecond); //6
+            console.log('component(MenuCreater): 明後日の曜日', wThird); //7
 
             let wd = ['日', '月', '火', '水', '木', '金', '土'];
             let date = y + '年' + m + '月' + d + '日' + '(' + wd[w] + ')';
             let dateSecond = y + '年' + m + '月' + dSecond + '日' + '(' + wd[wSecond] +  ')'; 
             let dateThird = y + '年' + m + '月' + dThird + '日' + '(' + wd[wThird] + ')'; 
-            console.log('component(MenuCreater): 今日のdate', date);
+            console.log(' 今日のdate', date);
 
             
 
@@ -89,7 +112,7 @@ class MenuCreater extends React.Component{
                 console.log('component(MenuCreater):actionに渡す値(val)',this.state.val);
                 console.log('component(MenuCreater):actionに渡す値(degree)',this.state.degree);
                 console.log('component(MenuCreater):actionに渡す値(date)',date);
-                this.props.dispatch(addMenu(this.createHashId(), val, degree, date));  //propsでdispachを受け取っている  connect(自分自身)
+                this.props.dispatch(addMenu(this.createHashId(),title, val, degree, date));  //propsでdispachを受け取っている  connect(自分自身)
 
                 
             } else if (val.length >=2  && !degree) {  //valの入力だけある場合　-> ただ投稿させるだけにする
@@ -98,42 +121,49 @@ class MenuCreater extends React.Component{
                 console.log('component(MenuCreater):actionに渡す値(val)',this.state.val);
                 console.log('component(MenuCreater):actionに渡す値(date)', date); //ここでのdateは読み込まれている
                 console.log('component(MenuCreater):degreeの値(degree)', this.state.degree);
-                this.props.dispatch(addMenu(this.createHashId(), val, degree, date));
+                this.props.dispatch(addMenu(this.createHashId(), title, val, degree, date));
             
                     
-            } else if (val.length == 1) { //テキストは空で入力された時
-                console.log('component(MenuCreater): valの値は入力されませんでした');
+            } else if (val.length == 1) { //テキストは空で入力された時は自動的に用意したメニューを表示させる
+                console.log('component(MenuCreater): valの値は入力されませんでした。自動的にメニューを作成します');
+                
                 if (degree) {
                     console.log('component(MenuCreater): degreeの値はあります', this.state.degree);
-
-                    switch (this.state.degree) { 　//あとで関数にリファクタする
+                    switch (this.state.degree) { 
                         case 'first':
-                            const valRun = 'フォーム修正や自分の弱み強みを見つける分析のための練習です。コーンを10m毎に置いて100mを走り、10m毎のラップを取ります。そのデータを元に自分の走りを分析します。50m走でやってもOK。';  //これを固定のテキストとする
-                            const valWeight= 'valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)valFirstTwo(固定)'
-                            const valJump = 'valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)valFirstThree(固定)'
-                            console.log('component(MenuCreater): containerからdispachをすることでMenuを作成します');
                             this.firstDegree();
-                            this.props.dispatch(firstMenu(this.createHashId(), titleRun, valRun,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
-                            this.props.dispatch(firstMenu(this.createHashId(), titleWeight, valWeight,  degree, dateSecond));
-                            this.props.dispatch(firstMenu(this.createHashId(), titleJump, valJump,  degree, dateThird));
+                            console.log('component(MenuCreater): 疲労度1のメニューを作成します');
+                            this.props.dispatch(createMenu(this.createHashId(), titleRun, valRun,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(createMenu(this.createHashId(), titleJump, valWeight,  degree, dateSecond));
+                            this.props.dispatch(createMenu(this.createHashId(), titleWeight, valJump,  degree, dateThird));
                             break;
-                        //以降同じである
                         case 'second':
-                            const valSecondOne =  '疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です'
-                            const valSecondTwo =  '疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です'
-                            const valSecondThree =  '疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です疲労度は2です'
                             this.secondDegree();
-                        
-                            console.log('component(MenuCreater): 疲労度はsecondです');
+                            console.log('component(MenuCreater): 疲労度２のメニューを作成します');
+                            this.props.dispatch(createMenu(this.createHashId(), titleRest, valRest,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(createMenu(this.createHashId(), titleRun, valRun,  degree, dateSecond));
+                            this.props.dispatch(createMenu(this.createHashId(), titleWeight, valWeight,  degree, dateThird));
                             break;
                         case 'third':
-                            console.log('component(MenuCreater): 疲労度はthirdです');
+                            console.log('component(MenuCreater): 疲労度3のメニューを作成します');
+                            this.thirdDegree();
+                            this.props.dispatch(createMenu(this.createHashId(), titleRest, valRest,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(createMenu(this.createHashId(), titleSlowRun, valSlowRun,  degree, dateSecond));
+                            this.props.dispatch(createMenu(this.createHashId(), titleWeight, valWeight,  degree, dateThird));
                             break;
                         case 'fourth':
-                            console.log('component(MenuCreater): 疲労度はfourthです');
+                            console.log('component(MenuCreater): 疲労度4のメニューを作成します');
+                            this.fourthDegree();
+                            this.props.dispatch(createMenu(this.createHashId(), titleRest, valRest,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(createMenu(this.createHashId(), titleSlowRun, valSlowRun,  degree, dateSecond));
+                            this.props.dispatch(createMenu(this.createHashId(), titleFitness, valFitness,  degree, dateThird));
                             break;
                         case 'fifth':
-                            console.log('component(MenuCreater): 疲労度はfifthです');
+                            console.log('component(MenuCreater): 疲労度5のメニューを作成します');
+                            this.fifthDegree();
+                            this.props.dispatch(createMenu(this.createHashId(), titleRest, valRest,  degree, date));  //引数として ハッシュ化ID , 内容の文章, degreeの値, 日付
+                            this.props.dispatch(createMenu(this.createHashId(), titleRest, valRest,  degree, dateSecond));
+                            this.props.dispatch(createMenu(this.createHashId(), titleFitness, valFitness,  degree, dateThird));
                             break;
                         default: 
                     }
@@ -145,8 +175,6 @@ class MenuCreater extends React.Component{
                  val: '',
                  degree: '',
               });
-            console.log('component(MenuCreater):setStateを使ったのでrenderが呼ばれリセットされます');
-     
         }
     }
 
@@ -262,7 +290,7 @@ class MenuCreater extends React.Component{
                     <h2><span id="js-modalBtn"  className="c-modalHead__btn c-modalBtn__fifth"  onClick={this.fifthDegree} >5</span ></h2>
                 </div>
                 <div className="c-modalBody">
-                    <h2>やりたいメニューがあれば追加できます。</h2>
+                    <h2>やりたいメニューがあれば追加できます。(なければshift + enterで確定)</h2>
                     <textarea name="" id="" cols="30" rows="10"  onChange={this.handleChange}  val={this.state.val} onKeyUp={this.handleKeyUp}/>
                 </div>
             </section>

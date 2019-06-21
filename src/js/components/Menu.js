@@ -71,9 +71,7 @@ class Menu extends React.Component{
                 onChange={this.handleChangeText} onKeyUp={this.handleKeyUpClose}/> :
       <div className="c-menu__body">
           {/* ここに指定したメニューを表示させる */}
-          <ul>
-            <li>{this.state.text}</li>
-          </ul>
+          <p>{this.state.text}</p> 
       </div>;
     
     return (
